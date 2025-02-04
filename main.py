@@ -32,9 +32,6 @@ def search_data(id:int):
 @app.post("/data/add")
 def add_data(new_data:dict):
     global data
-
-    # new_data['id'] = int(new_data['id'])
-    # new_data['age'] = int(new_data['age'])
     
     new_row = pd.DataFrame([new_data])
     data = pd.concat([data, new_row], ignore_index=True)
