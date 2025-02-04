@@ -29,15 +29,14 @@ def search_data(id:int):
     return {'result': result.to_dict(orient='records')}
 
 # # menambahkan data
-# @app.post("/data/add")
-# def add_data(new_data:dataitem):
-#     new_data = new_data.split('?')
-#     new_row = {'id':new_data[0],
-#                'nama':new_data[1],
-#                'age':new_data[2],
-#                'job':new_data[3]}
-    
-#     new_row = pd.DataFrame([new_row])
-#     data = pd.concat([data, new_row], ignore_index=True)
+@app.post("/data/add")
+def add_data(new_data:dict):
+    global data
 
-#     return {'message':new_data}
+    # new_data['id'] = int(new_data['id'])
+    # new_data['age'] = int(new_data['age'])
+    
+    new_row = pd.DataFrame([new_data])
+    data = pd.concat([data, new_row], ignore_index=True)
+
+    return {'message':data.to_dict(orient='records')}
